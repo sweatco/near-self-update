@@ -14,6 +14,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
         impl #name {
             pub fn update_contract(&self) -> Promise {
                 assert!(env::predecessor_account_id() == self.manager, "Only the manager can update the code");
+                assert_one_yocto();
 
                 let code = env::input().expect("Error: No input").to_vec();
 
