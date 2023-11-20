@@ -13,4 +13,6 @@ fn main() {
     let utc_datetime: DateTime<Utc> = Utc::now();
     let compilation_datetime = utc_datetime.format("%d/%m/%Y %H:%M:%S%.3f").to_string();
     println!("cargo:rustc-env=COMPILATION_DATETIME={}", compilation_datetime);
+
+    println!("cargo:rustc-env=CONTRACT_RELEASE_NOTES={}", "Initial contract state");
 }

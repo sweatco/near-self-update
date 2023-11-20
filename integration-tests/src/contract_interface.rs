@@ -23,8 +23,16 @@ impl ContractApiIntegration for TestContract<'_> {
         self.call_contract("version_metadata", ()).await
     }
 
-    async fn update_contract(&mut self, code: &[u8]) -> Result<()> {
-        self.call_user("update_contract", code).await
+    async fn update_contract(&mut self, code: Vec<u8>) -> Result<()> {
+        println!("▶️ update_contract");
+
+        let transaction = self.user_account().call(self.contract().id(), "update_contract");
+
+        let result = transaction.args(code).max_gas().transact().await?.into_result()?;
+
+        println!("Result: {:?}", result);
+
+        Ok(())
     }
 
     async fn after_update(&mut self) -> Result<()> {
