@@ -1,0 +1,21 @@
+[package]
+name = "test-contract"
+version = "1.0.0"
+authors = ["Sweat Economy"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = []
+integration-test = []
+
+[dependencies]
+near-sdk = { workspace = true }
+
+model = { workspace = true }
+near-self-update-model = { workspace = true }
+
+[build-dependencies]
+chrono = "0.4.31"

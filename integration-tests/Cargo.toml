@@ -1,0 +1,18 @@
+[package]
+name = "integration-tests"
+version = "0.0.1"
+edition = "2021"
+
+
+[dependencies]
+model = { workspace = true }
+near-self-update-model = { workspace = true }
+
+integration-utils = { workspace = true }
+integration-trait = { workspace = true }
+
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+near-sdk = { workspace = true }
+near-workspaces = { workspace = true }
