@@ -3,6 +3,9 @@ use std::process::Command;
 use chrono::{DateTime, Utc};
 
 fn main() {
+    // Always rerun build.rs
+    println!("cargo:rerun-if-changed=NULL");
+
     let output = Command::new("git").args(&["rev-parse", "HEAD"]).output().unwrap();
     let commit_hash = String::from_utf8(output.stdout).unwrap();
     println!("cargo:rustc-env=GIT_COMMIT_HASH={}", commit_hash);

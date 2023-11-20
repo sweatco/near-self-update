@@ -8,13 +8,15 @@ use near_sdk::{
 pub struct VersionMetadata {
     pub compilation_date_utc: String,
     pub commit_hash: String,
+    pub release_notes: String,
 }
 
 impl VersionMetadata {
-    pub fn new(compilation_date: &str, commit_hash: &str) -> Self {
+    pub fn new(compilation_date: &str, commit_hash: &str, release_notes: &str) -> Self {
         Self {
             compilation_date_utc: compilation_date.to_string(),
             commit_hash: commit_hash.to_string(),
+            release_notes: release_notes.to_string(),
         }
     }
 }

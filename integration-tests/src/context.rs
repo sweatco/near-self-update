@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use integration_utils::integration_contract::IntegrationContract;
+use integration_utils::{integration_contract::IntegrationContract, misc::ToNear};
 use model::api::ContractApiIntegration;
 use near_workspaces::Account;
 
@@ -35,7 +35,10 @@ impl IntegrationContext for Context {
 }
 
 pub(crate) async fn prepare_contract() -> anyhow::Result<Context> {
-    let context = Context::new(&[TEST_CONTRACT], "build-integration".into()).await?;
-    context.test_contract().init().await?;
+    let mut context = Context::new(&[TEST_CONTRACT], "build-integration".into()).await?;
+
+    let manager = context.manager().await?;
+
+    context.test_contract().init(manager.to_near()).await?;
     Ok(context)
 }

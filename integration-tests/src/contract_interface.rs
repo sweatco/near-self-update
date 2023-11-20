@@ -2,6 +2,7 @@ use anyhow::Result;
 use async_trait::async_trait;
 use integration_utils::integration_contract::IntegrationContract;
 use model::api::ContractApiIntegration;
+use near_sdk::{serde_json::json, AccountId};
 use near_self_update_model::VersionMetadata;
 use near_workspaces::{Account, Contract};
 
@@ -14,12 +15,20 @@ pub struct TestContract<'a> {
 
 #[async_trait]
 impl ContractApiIntegration for TestContract<'_> {
-    async fn init(&self) -> Result<()> {
-        self.call_contract("init", ()).await
+    async fn init(&self, manager: AccountId) -> Result<()> {
+        self.call_contract("init", json!({ "manager": manager })).await
     }
 
     async fn version_metadata(&self) -> Result<VersionMetadata> {
         self.call_contract("version_metadata", ()).await
+    }
+
+    async fn update_contract(&mut self, code: &[u8]) -> Result<()> {
+        self.call_user("update_contract", code).await
+    }
+
+    async fn after_update(&mut self) -> Result<()> {
+        self.call_contract("after_update", ()).await
     }
 }
 
@@ -39,7 +48,7 @@ impl<'a> IntegrationContract<'a> for TestContract<'a> {
     fn user_account(&self) -> Account {
         self.account
             .as_ref()
-            .expect("Set account with `user` method first")
+            .expect("Set account with `with_user` method first")
             .clone()
     }
 

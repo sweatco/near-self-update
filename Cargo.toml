@@ -16,7 +16,7 @@ model = { path = "model" }
 near-self-update = { path = "near-self-update" }
 near-self-update-model = { path = "near-self-update-model" }
 
-integration-trait = { git = "https://github.com/sweatco/integration-trait.git", rev = "83a69f7ba4acab9405bf935f7dfc70f2f5279c40" }
+integration-trait = { git = "https://github.com/sweatco/integration-trait.git", rev = "13387ffd4500d720920e81030ab2560050ad4a1d" }
 integration-utils = { git = "https://github.com/sweatco/integration-utils.git", rev = "0b3c2faf0db31cdb3481be4d35dbb48b62a98618" }
 
 near-workspaces = "0.9.0"
