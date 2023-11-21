@@ -1,6 +1,8 @@
+use integration_trait::make_integration_version;
 use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
     serde::{Deserialize, Serialize},
+    PromiseOrValue,
 };
 
 #[derive(Debug, Clone, BorshDeserialize, BorshSerialize, Serialize, Deserialize)]
@@ -19,4 +21,12 @@ impl VersionMetadata {
             release_notes: release_notes.to_string(),
         }
     }
+}
+
+#[make_integration_version]
+pub trait SelfUpdateApi {
+    fn version_metadata(&self) -> VersionMetadata;
+    #[update]
+    fn update_contract(&mut self) -> PromiseOrValue<()>;
+    fn after_update(&mut self);
 }

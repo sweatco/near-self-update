@@ -3,7 +3,7 @@ use async_trait::async_trait;
 use integration_utils::integration_contract::IntegrationContract;
 use model::api::ContractApiIntegration;
 use near_sdk::{serde_json::json, AccountId};
-use near_self_update_model::VersionMetadata;
+use near_self_update_model::{SelfUpdateApiIntegration, VersionMetadata};
 use near_workspaces::{Account, Contract};
 
 pub const TEST_CONTRACT: &str = "test_contract";
@@ -18,7 +18,10 @@ impl ContractApiIntegration for TestContract<'_> {
     async fn init(&self, manager: AccountId) -> Result<()> {
         self.call_contract("init", json!({ "manager": manager })).await
     }
+}
 
+#[async_trait]
+impl SelfUpdateApiIntegration for TestContract<'_> {
     async fn version_metadata(&self) -> Result<VersionMetadata> {
         self.call_contract("version_metadata", ()).await
     }

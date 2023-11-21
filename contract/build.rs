@@ -15,4 +15,8 @@ fn main() {
     println!("cargo:rustc-env=COMPILATION_DATETIME={}", compilation_datetime);
 
     println!("cargo:rustc-env=CONTRACT_RELEASE_NOTES={}", "Initial contract state");
+    // println!(
+    //     "cargo:rustc-env=CONTRACT_RELEASE_NOTES={}",
+    //     "Updated contract with some stuff"
+    // );
 }
