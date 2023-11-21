@@ -5,11 +5,7 @@ use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
     env, log, near_bindgen, AccountId, Gas, PanicOnDefault, Promise, PromiseOrValue,
 };
-use near_self_update_model::{SelfUpdateApi, VersionMetadata};
-
-const COMPILATION_DATETIME: &str = env!("COMPILATION_DATETIME");
-const COMMIT_HASH: &str = env!("GIT_COMMIT_HASH");
-const CONTRACT_RELEASE_NOTES: &str = env!("CONTRACT_RELEASE_NOTES");
+use near_self_update_model::{SelfUpdateApi, SelfUpdateCallback, VersionMetadata};
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
@@ -30,7 +26,11 @@ impl ContractApi for Contract {
 #[near_bindgen]
 impl SelfUpdateApi for Contract {
     fn version_metadata(&self) -> VersionMetadata {
-        VersionMetadata::new(COMPILATION_DATETIME, COMMIT_HASH, CONTRACT_RELEASE_NOTES)
+        VersionMetadata::new(
+            env!("COMPILATION_DATETIME"),
+            env!("GIT_COMMIT_HASH"),
+            env!("CONTRACT_RELEASE_NOTES"),
+        )
     }
 
     fn update_contract(&mut self) -> PromiseOrValue<()> {
@@ -50,7 +50,10 @@ impl SelfUpdateApi for Contract {
             .as_return()
             .into()
     }
+}
 
+#[near_bindgen]
+impl SelfUpdateCallback for Contract {
     fn after_update(&mut self) {
         log!("after_update");
         log!(format!("{:?}", self.version_metadata()));

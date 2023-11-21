@@ -23,8 +23,6 @@ async fn update() -> Result<()> {
 
     let code = load_wasm("../res/updated_contract.wasm");
 
-    dbg!(code.len());
-
     context
         .test_contract()
         .with_user(&manager)

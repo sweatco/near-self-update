@@ -37,10 +37,6 @@ impl SelfUpdateApiIntegration for TestContract<'_> {
 
         Ok(())
     }
-
-    async fn after_update(&mut self) -> Result<()> {
-        self.call_contract("after_update", ()).await
-    }
 }
 
 impl<'a> IntegrationContract<'a> for TestContract<'a> {

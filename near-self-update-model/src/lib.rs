@@ -23,10 +23,13 @@ impl VersionMetadata {
     }
 }
 
+pub trait SelfUpdateCallback {
+    fn after_update(&mut self);
+}
+
 #[make_integration_version]
-pub trait SelfUpdateApi {
+pub trait SelfUpdateApi: SelfUpdateCallback {
     fn version_metadata(&self) -> VersionMetadata;
     #[update]
     fn update_contract(&mut self) -> PromiseOrValue<()>;
-    fn after_update(&mut self);
 }
