@@ -14,8 +14,8 @@ integration-test = []
 [dependencies]
 near-sdk = { workspace = true }
 
-model = { workspace = true }
-near-self-update-model = { workspace = true }
+update-model = { workspace = true }
+near-self-update = { workspace = true }
 
 [build-dependencies]
 chrono = "0.4.31"

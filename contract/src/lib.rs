@@ -1,11 +1,11 @@
 mod tests;
 
-use model::api::ContractApi;
 use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
     env, log, near_bindgen, AccountId, Gas, PanicOnDefault, Promise, PromiseOrValue,
 };
 use near_self_update_model::{SelfUpdateApi, SelfUpdateCallback, VersionMetadata};
+use update_model::api::ContractApi;
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]

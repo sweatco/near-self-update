@@ -5,14 +5,13 @@ edition = "2021"
 
 
 [dependencies]
-model = { workspace = true }
-near-self-update-model = { workspace = true }
+update-model = { workspace = true, features = ["integration-test", "integration-api"] }
+near-self-update = { workspace = true }
 
-integration-utils = { workspace = true }
-integration-trait = { workspace = true }
+nitka = { workspace = true }
+nitka-proc = { workspace = true }
 
 anyhow = { workspace = true }
-async-trait = { workspace = true }
 tokio = { workspace = true }
 near-sdk = { workspace = true }
 near-workspaces = { workspace = true }

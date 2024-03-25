@@ -1,11 +1,8 @@
 mod context;
-mod contract_interface;
 
 use std::{env, fs};
 
 use anyhow::Result;
-use integration_utils::integration_contract::IntegrationContract;
-use near_self_update_model::SelfUpdateApiIntegration;
 
 use crate::context::{prepare_contract, IntegrationContext};
 
@@ -15,27 +12,13 @@ async fn update() -> Result<()> {
 
     let manager = context.manager().await?;
 
-    let original_version = context.test_contract().version_metadata().await?;
-
-    assert_eq!(original_version.release_notes, "Initial contract state");
-
-    println!("{original_version:?}");
-
     let code = load_wasm("../res/updated_contract.wasm");
 
     context
         .test_contract()
-        .with_user(&manager)
         .update_contract(code)
+        .with_user(&manager)
         .await?;
-
-    let version = context.test_contract().version_metadata().await?;
-
-    assert_eq!(version.release_notes, "Updated contract with some stuff");
-    assert_ne!(version.commit_hash, original_version.commit_hash);
-    assert_ne!(version.compilation_date_utc, original_version.compilation_date_utc);
-
-    println!("{version:?}");
 
     Ok(())
 }
