@@ -16,7 +16,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
         impl #name {
             #[payable]
             pub fn update_contract(&mut self, code: Vec<u8>, callback: Option<String>) -> near_sdk::Promise {
-                self.assert_update();
+                self.assert_account_can_update();
                 near_sdk::assert_one_yocto();
 
                 let deploy = near_sdk::Promise::new(near_sdk::env::current_account_id()).deploy_contract(code);

@@ -1,6 +1,6 @@
 [package]
 name = "near-self-update"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Near contract update helper"
 homepage = "https://github.com/sweatco/near-self-update"
