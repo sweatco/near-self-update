@@ -26,7 +26,11 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
                 };
 
                 deploy
-                    .function_call(callback, vec![], 0, near_sdk::Gas(100_000_000_000_000))
+                    .function_call(callback,
+                                   vec![],
+                                   near_sdk::NearToken::from_yoctonear(0),
+                                   near_sdk::Gas::from_tgas(100),
+                )
                 .   as_return()
             }
 
