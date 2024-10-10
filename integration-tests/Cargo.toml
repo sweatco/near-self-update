@@ -5,7 +5,10 @@ edition = "2021"
 
 
 [dependencies]
-update-model = { workspace = true, features = ["integration-test", "integration-api"] }
+update-model = { workspace = true, features = [
+  "integration-test",
+  "integration-api",
+] }
 near-self-update = { workspace = true }
 
 nitka = { workspace = true }

@@ -1,6 +1,6 @@
 [package]
 name = "near-self-update-proc"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Vasily Styagov <styagov.dev@gmail.com>"]
 description = "Near contract update helper procedural macro"
 homepage = "https://github.com/sweatco/near-self-update"
